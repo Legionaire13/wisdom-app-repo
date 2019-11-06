@@ -6,7 +6,7 @@ body {
   font-size: 16px;
   line-height: 20px;
 
-  background-image: url(../bg/skulls.png);
+  background-image: url(../img/skulls.png);
 
 }
 
@@ -98,6 +98,8 @@ input{
 
   height: 100vw;
 
+  text-align: center;
+
   margin: 0;
   margin-top: 30px;
   padding-top: 50px;
@@ -108,4 +110,16 @@ input{
   text-shadow: 1px 1px 0px #ddd;
 
   background-color: #fcfcfc;
+}
+
+
+
+
+
+
+
+@media screen and (min-width: 768px) {
+  .answer {
+    height: 200px;
+  }
 }

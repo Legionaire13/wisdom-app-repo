@@ -8,6 +8,8 @@
   }
 
   function setDefaultPlaceholder() {
+    input.value = ""
+    // setTimeout(() => output.innerText = "", 5000)
     return input.setAttribute("placeholder", "Задай вопрос!")
   }
 
@@ -19,8 +21,14 @@
   return window.viewer = {
     inputField: input,
 
+    getInputValue: function () {
+      return input.value;
+    },
+
     renderResult: function (res) {
-      return output.innerText = res;
+      return output.innerText = `"${input.value}"
+
+       - ${res}`;
     }
   }
 }());
