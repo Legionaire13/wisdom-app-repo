@@ -9,8 +9,7 @@
 
   function setDefaultPlaceholder() {
     input.value = ""
-    // setTimeout(() => output.innerText = "", 5000)
-    return input.setAttribute("placeholder", "Задай вопрос!")
+    return input.setAttribute("placeholder", "задай мне вопрос")
   }
 
   (function () {
@@ -28,7 +27,7 @@
     renderResult: function (res) {
       return output.innerText = `"${input.value}"
 
-       - ${res}`;
+       - "${res}"`;
     }
   }
 }());
