@@ -1,0 +1,211 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.app {
+  margin: 0 auto;
+
+  min-width: 320px;
+  max-width: 425px;
+}
+
+.app__input-section {
+  background: url(../img/bg.jpg) no-repeat;
+  background-size: cover;
+}
+
+.app__question {
+  appearance: none;
+
+  font-weight: bolder;
+  font-size: 20px;
+  line-height: 20px;
+
+  text-align: center;
+
+  width: calc(100% - 80px);
+
+  margin: 30px;
+  margin-bottom: 20px;
+  padding: 10px;
+
+  border-radius: 7px;
+  border: none;
+
+  background-color: rgba(255, 255, 255, 0.3);
+
+  transition: box-shadow 0.3s;
+}
+
+.app__question:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.app__question:focus {
+  outline: none;
+
+  color: #fff;
+
+  border: 1px solid #fff;
+  padding: 9px;
+
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* миксин */
+.app__question {
+  @include placeholder {
+    color: #fff;
+  }
+}
+
+.app__picture {
+  display: block;
+
+  width: 300px;
+
+  margin: 0 auto;
+  transform: translate(10px);
+
+  /* outline: 1px solid white; */
+}
+
+.app__have-an-answer {
+  color: #fff;
+  font-size: 20px;
+  line-height: 20px;
+
+  padding: 10px;
+  margin-top: -30px;
+
+  text-align: center;
+  text-shadow: 0px 0px 20px #fff;
+
+  display: block;
+}
+
+.app__answer {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  font-weight: bolder;
+
+  color: #464265;
+
+  margin: 0;
+  padding: 30px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+  text-align: center;
+
+  /* background-color: #fff; */
+}
+
+
+
+
+
+
+
+/* tablets */
+@media screen and (min-width: 768px) {
+
+  body {
+    background-image: url(../img/bg-tab.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    height: 100%;
+  }
+
+  .app {
+    margin-top: 50px;
+    max-width: 568px;
+  }
+
+  .app__input-section {
+    background: none;
+  }
+
+  .app__question {
+    font-size: 26px;
+    line-height: 26px;
+  }
+
+  .app__picture {
+    width: 500px;
+    height: auto;
+
+    transform: translate(30px);
+  }
+
+  .app__have-an-answer {
+    margin-top: -20px;
+  }
+
+  .app__answer {
+    min-height: 100px;
+
+    margin-top: 50px;
+
+    font-size: 26px;
+    line-height: 26px;
+
+    color: #fff;
+
+    text-shadow: 0px 0px 70px #fff;
+  }
+
+}
+
+
+
+
+
+/* desktops */
+@media screen and (min-width: 1200px) {
+
+  .app {
+    margin-top: 100px;
+
+    max-width: 768px;
+  }
+
+  .app__picture {
+    width: 668px;
+
+    transform: translate(0px);
+  }
+
+}
