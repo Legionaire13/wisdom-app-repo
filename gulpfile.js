@@ -15,7 +15,7 @@ const htmlmin = require("gulp-htmlmin")
 const rename = require("gulp-rename")
 const sass = require("gulp-sass")
 const sourcemaps = require("gulp-sourcemaps")
-const svgstore = require("gulp-svgstore")
+// const svgstore = require("gulp-svgstore")
 const webp = require("gulp-webp")
 sass.compiler = require("node-sass")
 
@@ -26,11 +26,8 @@ const terser = require('gulp-terser')
 // подготовка css
 gulp.task("styling", async () => {
   gulp.src([
-      "./source/normalize/normalize.css",
-      "./source/sass/variables.scss",
-      "./source/sass/style.scss",
-      "./source/sass/mixins.scss",
-      "./source/sass/blocks/**/*.scss"
+      "source/sass/mixins.scss",
+      "source/sass/style.scss"
     ], {
       allowEmpty: true
     })
@@ -48,42 +45,11 @@ gulp.task("styling", async () => {
     .pipe(browserSync.stream());
 });
 
-//critical css
-// gulp.task("critical", async () => {
-//   critical.generate({
-//       inline: true,
-//       base: './build',
-//       src: 'index.html',
-//       css: ['./build/css/style.min.css'],
-//       dest: './index.html',
-//       minify: true,
-//       width: 320,
-//       height: 480
-//   })
-// })
-// Generate & Inline Critical-path CSS
-gulp.task('critical', async () => {
-  return gulp
-    .src('./build/*.html')
-    .pipe(critical({
-      base: './build',
-      inline: true,
-    }))
-    .on('error', err => {
-      log.error(err.message);
-    })
-    .pipe(gulp.dest('./build'));
-});
-
 // Копирование
 gulp.task("copy", async () => {
   gulp.src([
-      // "./source/fonts/**/*.{woff,woff2}",
       "./source/img/**",
-      "./source/robots.txt",
-      // "./source/favicon.png"
-      // "./source/js/**",
-      // ".source/*.html"
+      "./source/robots.txt"
     ], {
       base: "source"
     })
@@ -92,16 +58,6 @@ gulp.task("copy", async () => {
 
 // удаление файлов и директорий
 gulp.task("clean", () => del("build/*"));
-
-// сборка спрайта
-// gulp.task("svg-sprite", () => {
-//   return gulp.src("./source/img/icon-*.svg")
-//     .pipe(svgstore({
-//       inlineSvg: true
-//     }))
-//     .pipe(rename("sprite.svg"))
-//     .pipe(gulp.dest("./build/img"));
-// });
 
 // обработка html
 gulp.task("html", () => {
@@ -126,12 +82,6 @@ gulp.task("browser-sync", () => {
     }
   });
 });
-
-
-
-
-
-
 
 // IMGs
 // images processing в source
@@ -159,31 +109,15 @@ gulp.task("webp", async () => {
 });
 
 
-// responsive images
-// gulp.task('respimg', function () {
-//   return gulp.src('source/img/*.{png,jpg}')
-//     .pipe(responsive({
-//       'bg-*.jpg': {
-//         width: 600,
-//         height: 360,
-//         progressive: true
-//       }
-//     }))
-//     .pipe(gulp.dest('build/respimg'));
-// });
-
-
-
-
-
-
-
-
 // JS
 gulp.task("scripts", () => {
-  return gulp.src("./source/js/**/*.js")
+  return gulp.src([
+    "source/js/appData.js",
+    "source/js/viewer.js",
+    "source/js/app.js"
+    ])
     .pipe(sourcemaps.init())
-    .pipe(concat("scripts.js"))
+    .pipe(concat("app.js"))
     .pipe(terser())
     .pipe(rename({
       prefix: "",
@@ -229,8 +163,7 @@ gulp.task("build",
       "scripts"
     ),
     "copy",
-    gulp.parallel("svg-sprite", "webp"),
-    "html",
-    "critical"
+    "webp",
+    "html"
   )
 );
