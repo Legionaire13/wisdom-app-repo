@@ -8,8 +8,8 @@
   }
 
   function setDefaultPlaceholder() {
-    input.value = ""
-    return input.setAttribute("placeholder", "задай мне вопрос")
+    return input.value = ""
+    // return input.setAttribute("placeholder", "")
   }
 
   (function () {
@@ -25,9 +25,7 @@
     },
 
     renderResult: function (res) {
-      return output.innerText = `"${input.value}"
-
-       - "${res}"`;
+      return output.innerText = `"${res}"`;
     }
   }
 }());
