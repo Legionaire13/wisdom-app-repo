@@ -110,7 +110,7 @@ gulp.task("webp", async () => {
 
 
 // JS
-gulp.task("scripts", () => {
+gulp.task("scripts", async () => {
   return gulp.src([
     "source/js/appData.js",
     "source/js/viewer.js",
@@ -133,7 +133,7 @@ gulp.task("scripts", () => {
 
 
 // watchers
-gulp.task("serve", () => {
+gulp.task("serve", async () => {
   browserSync.init({
     browser: "chrome",
     server: "./build",

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
   <link rel="stylesheet" href="css/style.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:600|Oswald&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet">
   <title>Предсказатель</title>
 </head>
 
@@ -17,17 +17,20 @@
     <h1 class="visually-hidden">Предсказатель</h1>
 
     <div class="app__input-section">
-      <input type="text" class="app__question" id="question" name="question" placeholder="задай мне вопрос">
+      <b class="app__ask-a-question">задай мне вопрос</b>
+
+      <input type="text" class="app__question" id="question" name="question" placeholder="">
+
       <picture>
         <source media="(min-width: 768px)" srcset="img/magic-img-tab@2x.png 2x, img/magic-img-tab.png">
         <source srcset="img/magic-img@2x.png 2x, img/magic-img.png">
-        <img class="app__picture" src="img/magic-img.png" width="300" height="150" alt="магия слова">
+        <img class="app__picture" src="img/magic-img.png" width="300" height="150" alt="Предсказатель">
       </picture>
+
       <b class="app__have-an-answer">получи ответ</b>
     </div>
 
     <div class="app__output-section">
-
       <p class="app__answer" id="answer">
         Скоро здесь будет Мудрость дедушки ИзвергИля
       </p>
