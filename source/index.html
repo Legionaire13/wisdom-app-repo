@@ -38,6 +38,23 @@
   </article>
 
 
+  <script>
+    // navigator.serviceWorker
+    //   .getRegistrations()
+    //   .then(function(registrations) {
+    //     for(let registration of registrations) {
+    //       registration.unregister()
+    //     }
+    //   })
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('./sw.js')
+        .then(function () {
+          console.log("Service Worker Registered");
+        });
+    }
+  </script>
   <script src="js/app.min.js"></script>
 </body>
 

@@ -48,8 +48,10 @@ gulp.task("styling", async () => {
 // Копирование
 gulp.task("copy", async () => {
   gulp.src([
-      "./source/img/**",
-      "./source/robots.txt"
+    "./source/img/**",
+    "./source/robots.txt",
+    "./source/sw.js"
+
     ], {
       base: "source"
     })
