@@ -32,7 +32,6 @@
 
         obj.keywords.forEach((keyword) => {
           if (userInput.includes(keyword)) {
-            // console.log(keyword)
             currentObj.rate++
           }
         })
@@ -42,23 +41,23 @@
         }
       })
 
+      console.log("Array of answers:\n", pullOfAnswers.sort((a, b) => b.rate - a.rate));
+      
       // pullOfAnswers пустой? - дефолтные фразы, нет? - находим с максимальным рейтингом и выбираем любой из одинаковых если не один
       if (pullOfAnswers.length < 1) {
-        window.viewer.renderResult(getAnswer(window.appData.fallback))
+        window.viewer.renderResult(getAnswer(window.appData.fallback));
       } else {
         pullOfAnswers = findMaxRatedAnswers(pullOfAnswers, "rate")
           .map((obj) => obj.phrase)
-        window.viewer.renderResult(getAnswer(pullOfAnswers))
+
+        // сюда дописать дополнительные условия
+        window.viewer.renderResult(getAnswer(pullOfAnswers));
+        // console.log("resulting array of answers:\n" + pullOfAnswers)
       }
 
-      //   result = window.appData.keywordsAndPhrasesSet.find((obj) => userInput.includes(obj.keywords));
 
       //   // проверка на вопрос
       //   if (!userInput.endsWith("?")) return window.viewer.renderResult("А это точно вопрос? Какой вопрос - такой ответ!")
-
-      //   // вывод результата
-      //   return (result !== undefined) ? window.viewer.renderResult(getAnswer(result.phrases)) :
-      //     window.viewer.renderResult(getAnswer(window.appData.fallbackPhrasesSet))
     }
   }
 

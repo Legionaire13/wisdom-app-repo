@@ -17,14 +17,13 @@
     <h1 class="visually-hidden">Предсказатель</h1>
 
     <div class="app__input-section">
-      <b class="app__ask-a-question">задай мне вопрос</b>
-
+      <label class="app__ask-a-question" for="question">задай мне вопрос</label>
       <input type="text" class="app__question" id="question" name="question" placeholder="">
 
       <picture>
         <source media="(min-width: 768px)" srcset="img/magic-img-tab@2x.png 2x, img/magic-img-tab.png">
         <source srcset="img/magic-img@2x.png 2x, img/magic-img.png">
-        <img class="app__picture" src="img/magic-img.png" width="300" height="150" alt="Предсказатель">
+        <img class="app__picture" src="img/magic-img.png" width="300" height="150" alt="Предсказатель: задай вопрос и получит ответ">
       </picture>
 
       <b class="app__have-an-answer">получи ответ</b>
@@ -39,17 +38,9 @@
 
 
   <script>
-    // navigator.serviceWorker
-    //   .getRegistrations()
-    //   .then(function(registrations) {
-    //     for(let registration of registrations) {
-    //       registration.unregister()
-    //     }
-    //   })
-
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('./sw.js')
+        .register('sw.js')
         .then(function () {
           console.log("Service Worker Registered");
         });
