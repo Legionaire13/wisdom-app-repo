@@ -42,11 +42,13 @@
       })
 
       console.log("Array of answers:\n", pullOfAnswers.sort((a, b) => b.rate - a.rate));
-      
+
       // pullOfAnswers пустой? - дефолтные фразы, нет? - находим с максимальным рейтингом и выбираем любой из одинаковых если не один
       if (pullOfAnswers.length < 1) {
+
         window.viewer.renderResult(getAnswer(window.appData.fallback));
       } else {
+        
         pullOfAnswers = findMaxRatedAnswers(pullOfAnswers, "rate")
           .map((obj) => obj.phrase)
 
