@@ -48,6 +48,7 @@ gulp.task("styling", async () => {
 // Копирование
 gulp.task("copy", async () => {
   gulp.src([
+    "./source/favicon.png",
     "./source/img/**",
     "./source/robots.txt",
     "./source/sw.js"
