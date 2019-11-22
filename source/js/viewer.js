@@ -3,23 +3,21 @@
   const input = document.getElementById("question")
   const output = document.getElementById("answer")
 
-  function clearPlaceholder() {
+  function _clearPlaceholder() {
     return input.setAttribute("placeholder", "")
   }
 
-  function setDefaultPlaceholder() {
+  function _setDefaultPlaceholder() {
     return input.value = ""
     // return input.setAttribute("placeholder", "")
   }
 
   (function () {
-    input.addEventListener("focus", clearPlaceholder)
-    input.addEventListener("blur", setDefaultPlaceholder)
+    input.addEventListener("focus", _clearPlaceholder)
+    input.addEventListener("blur", _setDefaultPlaceholder)
   }());
 
   return window.viewer = {
-    inputField: input,
-
     getInputValue: function () {
       return input.value;
     },

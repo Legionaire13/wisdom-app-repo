@@ -15,21 +15,20 @@
     let userInput = window.viewer.getInputValue().toLowerCase();
 
     // рандомный ответ из нескольких подходящих
-    function getRandowmAnswer(arr) {
+    function _getRandowmAnswer(arr) {
       return arr[Math.floor((Math.random() * 10) % arr.length)]
     }
 
-    function findMaxRatedAnswers(arr, name) {
-      let rateArr = arr.map((item) => item[name])
-      let maxRate = Math.max(...rateArr)
+    function _findMaxRatedAnswers(arr, propName) {
+      let rateArr = arr.map((item) => item[propName]),
+          maxRate = Math.max(...rateArr)
       return arr.filter((obj) => obj.rate == maxRate)
     }
 
-    function checkForRecentAnswers(arr) {
+    function _checkForRecentAnswers(arr) {
       if (arr.length <= 0) return arr;
       return arr.map((obj) => {
         if (recentAnswers.includes(obj.phrase)) {
-          // console.log("obj  : ", obj);
             (obj.rate > 2) ? obj.rate = 1 : obj.rate--;
         }
         return obj;
@@ -60,30 +59,30 @@
       })
 
       if (recentAnswers.length > 0) {
-        pullOfAnswers = checkForRecentAnswers(pullOfAnswers)
+        pullOfAnswers = _checkForRecentAnswers(pullOfAnswers)
       }
 
-      console.log(recentAnswers);
-      console.log("Rated answers: \n", pullOfAnswers.sort((a, b) => b.rate - a.rate));
+      console.log("Recent Answers: \n", recentAnswers, "\nRated answers: \n", pullOfAnswers.sort((a, b) => b.rate - a.rate));
 
       // если pullOfAnswers не пустой:
       if (pullOfAnswers.length > 0) {
 
-        pullOfAnswers = findMaxRatedAnswers(pullOfAnswers, "rate")
+        pullOfAnswers = _findMaxRatedAnswers(pullOfAnswers, "rate")
           .map((obj) => obj.phrase)
 
-        let answer = getRandowmAnswer(pullOfAnswers)
+        let answer = _getRandowmAnswer(pullOfAnswers)
         window.viewer.renderResult(answer)
         rememberRecentAnswer(answer)
         // console.log("not empty, recent answers: ", recentAnswers)
         // console.log("resulting array of answers:\n" + pullOfAnswers)
 
-      } else {  // pullOfAnswers пустой:
+      } else {
+        // pullOfAnswers пустой:
         pullOfAnswers = window.appData.fallback;
 
         // возможно стоит фильтровать здесь так
         pullOfAnswers = pullOfAnswers.filter((obj) => !(recentAnswers.includes(obj.phrase)))
-        let answer = getRandowmAnswer(pullOfAnswers)
+        let answer = _getRandowmAnswer(pullOfAnswers)
         window.viewer.renderResult(answer)
         rememberRecentAnswer(answer)
       }
@@ -91,6 +90,6 @@
   }
 
   // общий обработчик на input
-  window.viewer.inputField.addEventListener("change", userInputHandler)
+  document.getElementById("question").addEventListener("change", userInputHandler)
 
 }());
