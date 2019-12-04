@@ -1,4 +1,7 @@
 "use strict";
+import appData from "./appData.js";
+import viewer from "./viewer.js";
+
 (function () {
   let recentAnswers = [];
 
@@ -10,9 +13,9 @@
     // console.log("answer remembered!", phrase, recentAnswers)
   }
 
-  // window.viewer.renderResult();
+  // viewer.renderResult();
   function userInputHandler() {
-    let userInput = window.viewer.getInputValue().toLowerCase();
+    let userInput = viewer.getInputValue().toLowerCase();
 
     // рандомный ответ из нескольких подходящих
     function _getRandowmAnswer(arr) {
@@ -39,7 +42,7 @@
 
       let pullOfAnswers = [];
 
-      window.appData.answers.forEach((obj) => {
+      appData.answers.forEach((obj) => {
         // mock:
         // {
         //   phrase: "Большой зелёный барабан",
@@ -71,19 +74,19 @@
           .map((obj) => obj.phrase)
 
         let answer = _getRandowmAnswer(pullOfAnswers)
-        window.viewer.renderResult(answer)
+        viewer.renderResult(answer)
         rememberRecentAnswer(answer)
         // console.log("not empty, recent answers: ", recentAnswers)
         // console.log("resulting array of answers:\n" + pullOfAnswers)
 
       } else {
         // pullOfAnswers пустой:
-        pullOfAnswers = window.appData.fallback;
+        pullOfAnswers = appData.fallback;
 
         // возможно стоит фильтровать здесь так
         pullOfAnswers = pullOfAnswers.filter((obj) => !(recentAnswers.includes(obj.phrase)))
         let answer = _getRandowmAnswer(pullOfAnswers)
-        window.viewer.renderResult(answer)
+        viewer.renderResult(answer)
         rememberRecentAnswer(answer)
       }
     }

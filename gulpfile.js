@@ -4,7 +4,7 @@ const gulp = require("gulp")
 const autoprefixer = require("gulp-autoprefixer")
 const browserSync = require("browser-sync").create()
 const cleanCSS = require("gulp-clean-css")
-const critical = require("critical").stream
+// const critical = require("critical").stream
 const concat = require("gulp-concat")
 const del = require("del")
 const imagemin = require("gulp-imagemin")
@@ -19,16 +19,39 @@ const sourcemaps = require("gulp-sourcemaps")
 const webp = require("gulp-webp")
 sass.compiler = require("node-sass")
 
-const terser = require('gulp-terser')
+// const terser = require('gulp-terser')
 // const responsive = require('gulp-responsive');
+
+const config = {
+  scss: {
+    path: [
+      "source/sass/mixins.scss",
+      "source/sass/style.scss"
+    ]
+  },
+
+  rollup: {
+    path: [
+      "source/js/appData.js",
+      "source/js/viewer.js",
+      "source/js/app.js"
+    ]
+  },
+
+  copy: {
+    path: [
+      "./source/favicon.png",
+      "./source/img/**",
+      "./source/robots.txt",
+      "./source/sw.js"
+    ]
+  }
+}
 
 // tasks
 // подготовка css
 gulp.task("styling", async () => {
-  gulp.src([
-      "source/sass/mixins.scss",
-      "source/sass/style.scss"
-    ], {
+  gulp.src(config.scss.path, {
       allowEmpty: true
     })
     .pipe(plumber())
@@ -47,13 +70,7 @@ gulp.task("styling", async () => {
 
 // Копирование
 gulp.task("copy", async () => {
-  gulp.src([
-    "./source/favicon.png",
-    "./source/img/**",
-    "./source/robots.txt",
-    "./source/sw.js"
-
-    ], {
+  gulp.src(config.copy.path, {
       base: "source"
     })
     .pipe(gulp.dest("./build"));
@@ -112,23 +129,47 @@ gulp.task("webp", async () => {
 });
 
 
+
+
 // JS
+// gulp.task("scripts", async () => {
+//   return gulp.src([
+//     "source/js/appData.js",
+//     "source/js/viewer.js",
+//     "source/js/app.js"
+//     ])
+//     .pipe(sourcemaps.init())
+//     .pipe(concat("app.js"))
+//     .pipe(terser())
+//     .pipe(rename({
+//       prefix: "",
+//       suffix: ".min"
+//     }))
+//     .pipe(sourcemaps.write('./'))
+//     .pipe(gulp.dest("./build/js"));
+// });
+
+
+//JS
+const rollup = require("gulp-better-rollup");
+// const terser = require("rollup-plugin-terser");
+
 gulp.task("scripts", async () => {
-  return gulp.src([
-    "source/js/appData.js",
-    "source/js/viewer.js",
-    "source/js/app.js"
-    ])
+  return gulp.src(config.rollup.path)
+    .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(concat("app.js"))
-    .pipe(terser())
-    .pipe(rename({
-      prefix: "",
-      suffix: ".min"
+    .pipe(rollup({}, {
+      format: "iife",
+      // format: "umd",
+      // format: "ems",
+      // plugins: [terser()],
+      file: './build/app.min.js'
     }))
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write(""))
     .pipe(gulp.dest("./build/js"));
 });
+
+
 
 
 
@@ -158,7 +199,7 @@ gulp.task("serve", async () => {
 
 
 // final
-gulp.task("build",
+gulp.task("build", async () => {
   gulp.series("clean",
     gulp.parallel(
       "images",
@@ -169,4 +210,4 @@ gulp.task("build",
     "webp",
     "html"
   )
-);
+});

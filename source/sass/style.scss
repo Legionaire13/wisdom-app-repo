@@ -105,6 +105,8 @@ input {
 
 /* миксин */
 .app__question {
+  color: #fff;
+
   @include placeholder {
     color: #fff;
   }
