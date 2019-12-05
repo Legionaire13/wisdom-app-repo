@@ -4,7 +4,6 @@ const gulp = require("gulp")
 const autoprefixer = require("gulp-autoprefixer")
 const browserSync = require("browser-sync").create()
 const cleanCSS = require("gulp-clean-css")
-// const critical = require("critical").stream
 const concat = require("gulp-concat")
 const del = require("del")
 const imagemin = require("gulp-imagemin")
@@ -15,11 +14,10 @@ const htmlmin = require("gulp-htmlmin")
 const rename = require("gulp-rename")
 const sass = require("gulp-sass")
 const sourcemaps = require("gulp-sourcemaps")
-// const svgstore = require("gulp-svgstore")
 const webp = require("gulp-webp")
 sass.compiler = require("node-sass")
-
-// const terser = require('gulp-terser')
+// const svgstore = require("gulp-svgstore")
+// const critical = require("critical").stream
 // const responsive = require('gulp-responsive');
 
 const config = {
@@ -43,6 +41,7 @@ const config = {
       "./source/favicon.png",
       "./source/img/**",
       "./source/robots.txt",
+      "./source/README.md",
       "./source/sw.js"
     ]
   }
@@ -131,28 +130,13 @@ gulp.task("webp", async () => {
 
 
 
-// JS
-// gulp.task("scripts", async () => {
-//   return gulp.src([
-//     "source/js/appData.js",
-//     "source/js/viewer.js",
-//     "source/js/app.js"
-//     ])
-//     .pipe(sourcemaps.init())
-//     .pipe(concat("app.js"))
-//     .pipe(terser())
-//     .pipe(rename({
-//       prefix: "",
-//       suffix: ".min"
-//     }))
-//     .pipe(sourcemaps.write('./'))
-//     .pipe(gulp.dest("./build/js"));
-// });
+
 
 
 //JS
 const rollup = require("gulp-better-rollup");
-// const terser = require("rollup-plugin-terser");
+const { terser } = require("rollup-plugin-terser");
+console.log(terser)
 
 gulp.task("scripts", async () => {
   return gulp.src(config.rollup.path)
@@ -162,7 +146,7 @@ gulp.task("scripts", async () => {
       format: "iife",
       // format: "umd",
       // format: "ems",
-      // plugins: [terser()],
+      plugins: [terser()],
       file: './build/app.min.js'
     }))
     .pipe(sourcemaps.write(""))
@@ -199,7 +183,7 @@ gulp.task("serve", async () => {
 
 
 // final
-gulp.task("build", async () => {
+gulp.task("build",
   gulp.series("clean",
     gulp.parallel(
       "images",
@@ -210,4 +194,4 @@ gulp.task("build", async () => {
     "webp",
     "html"
   )
-});
+);

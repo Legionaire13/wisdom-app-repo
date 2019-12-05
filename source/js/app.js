@@ -65,7 +65,7 @@ import viewer from "./viewer.js";
         pullOfAnswers = _checkForRecentAnswers(pullOfAnswers)
       }
 
-      console.log("Recent Answers: \n", recentAnswers, "\nRated answers: \n", pullOfAnswers.sort((a, b) => b.rate - a.rate));
+      console.log("Input: \n", userInput, "\n\nRecent Answers: \n", recentAnswers, "\n\nRated answers: \n", pullOfAnswers.sort((a, b) => b.rate - a.rate));
 
       // если pullOfAnswers не пустой:
       if (pullOfAnswers.length > 0) {
