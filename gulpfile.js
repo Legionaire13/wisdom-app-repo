@@ -18,7 +18,7 @@ const webp = require("gulp-webp")
 sass.compiler = require("node-sass")
 // const svgstore = require("gulp-svgstore")
 // const critical = require("critical").stream
-// const responsive = require('gulp-responsive');
+// const responsive = require('gulp-responsive')
 
 const config = {
   scss: {
@@ -120,9 +120,16 @@ gulp.task("images", async () => {
 
 // преобразуем необходимые изображения в webp в source
 gulp.task("webp", async () => {
-  gulp.src("./source/img/**/*.{png,jpg}")
+  // gulp.src("./source/img/**/*.{png,jpg}")
+  gulp.src([
+    "source/img/bg-tab.jpg",
+    "source/img/bg.jpg",
+    "source/img/magic-img-tab.png",
+    "source/img/magic-img-tab@2x.png",
+    "source/img/magic-img.png",
+    "source/img/magic-img@2x.png"])
     .pipe(webp({
-      quality: 90
+      quality: 80
     }))
     .pipe(gulp.dest("./build/img"));
 });
@@ -143,9 +150,9 @@ gulp.task("scripts", async () => {
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(rollup({}, {
-      format: "iife",
+      // format: "iife",
       // format: "umd",
-      // format: "ems",
+      format: "esm",
       plugins: [terser()],
       file: './build/app.min.js'
     }))
