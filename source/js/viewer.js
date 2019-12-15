@@ -1,6 +1,7 @@
 'use strict';
 const input = document.getElementById("question")
 const output = document.getElementById("answer")
+const exclamation = document.getElementById("exclamation")
 let val;
 
 function _clearPlaceholder() {
@@ -24,6 +25,13 @@ export default {
   getInputValue: function () {
     val = input.value;
     return input.value;
+  },
+
+  toggleExclamation: function() {
+    if (exclamation.classList.contains("app__exclamation--visible")) {
+      return exclamation.classList.remove("app__exclamation--visible")
+    }
+    return exclamation.classList.add("app__exclamation--visible")
   },
 
   renderResult: function (res) {

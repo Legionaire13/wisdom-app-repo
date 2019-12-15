@@ -26,6 +26,7 @@
     <div class="app__input-section">
       <label class="app__ask-a-question" for="question">задай мне вопрос</label>
       <input type="text" class="app__question" id="question" name="question" placeholder="">
+      <b id="exclamation" class="app__exclamation">Вот это вопрос! Рекомендую обратиться ко мне за наградой!</b>
 
       <picture>
         <source media="(min-width: 768px)" srcset="img/magic-img-tab@2x.png 2x, img/magic-img-tab.png">
@@ -45,13 +46,17 @@
 
 
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('sw.js')
-        .then(function () {
-          console.log("Service Worker Registered");
-        });
-    }
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for(let registration of registrations) {
+        registration.unregister()
+      }})
+    // if ('serviceWorker' in navigator) {
+      // navigator.serviceWorker
+        // .register('sw.js')
+        // .then(function () {
+        //   console.log("Service Worker Registered");
+        // });
+    // }
   </script>
   <script src="js/app.min.js"></script>
 </body>

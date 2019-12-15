@@ -42,6 +42,12 @@ import viewer from "./viewer.js";
 
       let pullOfAnswers = [];
 
+      // проверка на награду
+      if (userInput.length > 38 && userInput.slice().split(" ").length > 7) {
+        viewer.toggleExclamation()
+        window.setTimeout(viewer.toggleExclamation, 8000)
+      }
+
       appData.answers.forEach((obj) => {
         // mock:
         // {
@@ -76,8 +82,6 @@ import viewer from "./viewer.js";
         let answer = _getRandowmAnswer(pullOfAnswers)
         viewer.renderResult(answer)
         rememberRecentAnswer(answer)
-        // console.log("not empty, recent answers: ", recentAnswers)
-        // console.log("resulting array of answers:\n" + pullOfAnswers)
 
       } else {
         // pullOfAnswers пустой:
