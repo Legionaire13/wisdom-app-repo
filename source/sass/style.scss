@@ -8,7 +8,7 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
- html {
+html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -174,7 +174,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -184,7 +185,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 
@@ -356,7 +358,7 @@ body {
   margin: 0;
   padding: 0;
 
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   line-height: 20px;
 }
@@ -481,7 +483,7 @@ input {
 
   transform: translate(-50%);
 
-  transition: opacity .5s;
+  transition: opacity 0.5s;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 
   &::after {
@@ -542,15 +544,8 @@ input {
   text-align: center;
 }
 
-
-
-
-
-
-
 /* tablets */
 @media screen and (min-width: 768px) {
-
   body {
     background-image: url(../img/bg-tab.jpg);
     background-repeat: no-repeat;
@@ -561,7 +556,11 @@ input {
   }
 
   .app {
-    height: calc(100% - 403px); // output section
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    min-height: 100vh;
   }
 
   .app__input-section {
@@ -574,7 +573,7 @@ input {
   }
 
   .app__output-section {
-    height: 100%;
+    flex-grow: 1;
 
     background-color: rgba(255, 255, 255, 0.2);
   }
@@ -630,16 +629,10 @@ input {
     color: #fff;
     text-shadow: 0px 5px 10px rgba(15, 18, 28, 1);
   }
-
 }
-
-
-
-
 
 /* desktops */
 @media screen and (min-width: 1200px) {
-
   .app__input-section {
     max-width: 768px;
   }
@@ -649,5 +642,4 @@ input {
 
     transform: translate(36px);
   }
-
 }
